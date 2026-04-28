@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { AppShell } from "../components/layout/AppShell";
 import { AllSpellsPage } from "../features/spells/components/AllSpellsPage";
 import { SavedSpellsPage } from "../features/spells/components/SavedSpellsPage";
@@ -35,6 +35,7 @@ export default function App() {
           }
           path="/salvas"
         />
+        <Route element={<Navigate replace to="/" />} path="*" />
       </Routes>
     </AppShell>
   );
