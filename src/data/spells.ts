@@ -19630,109 +19630,6 @@ export const spells = [
         type: "timed",
         duration: {
           type: "hour",
-          amount: 24,
-        },
-      },
-    ],
-    meta: {
-      ritual: true,
-    },
-    entries: [
-      "Essa magia concede a até dez criaturas voluntária que você possa ver, dentro do alcance, a habilidade de respirar embaixo d’água até a magia acabar. As criaturas afetadas também mantem sua forma normal de respiração.",
-    ],
-    miscTags: ["SGT"],
-    areaTags: ["MT"],
-    classes: {
-      fromClassList: [
-        {
-          name: "Druid",
-          source: "PHB",
-        },
-        {
-          name: "Ranger",
-          source: "PHB",
-        },
-        {
-          name: "Sorcerer",
-          source: "PHB",
-        },
-        {
-          name: "Wizard",
-          source: "PHB",
-        },
-        {
-          name: "Artificer",
-          source: "UAArtificer",
-        },
-        {
-          name: "Artificer (Revisited)",
-          source: "UAArtificerRevisited",
-        },
-        {
-          name: "Artificer",
-          source: "ERLW",
-        },
-      ],
-      fromSubclass: [
-        {
-          class: {
-            name: "Druid",
-            source: "PHB",
-          },
-          subclass: {
-            name: "Land",
-            source: "PHB",
-            subSubclass: "Coast",
-          },
-        },
-        {
-          class: {
-            name: "Warlock",
-            source: "PHB",
-          },
-          subclass: {
-            name: "Kraken (Stream)",
-            source: "Stream",
-          },
-        },
-      ],
-    },
-    backgrounds: [
-      {
-        name: "Simic Scientist",
-        source: "GGR",
-      },
-    ],
-  },
-  {
-    name: "Respirar Na Água",
-    source: "PHB PT-BR",
-    page: 287,
-    level: 3,
-    school: "T",
-    time: [
-      {
-        number: 1,
-        unit: "action",
-      },
-    ],
-    range: {
-      type: "point",
-      distance: {
-        type: "feet",
-        amount: 30,
-      },
-    },
-    components: {
-      v: true,
-      s: true,
-      m: "um pedaço de cana ou palha",
-    },
-    duration: [
-      {
-        type: "timed",
-        duration: {
-          type: "hour",
           amount: 1,
         },
       },
@@ -34312,4 +34209,4 @@ export const spells = [
       ],
     },
   },
-];
+]
