@@ -1,5 +1,5 @@
-import { Badge } from "../../../components/ui/Badge";
-import type { Spell } from "../types/spell";
+import { Badge } from "../../../../components/ui/Badge"
+import type { Spell } from "../../types/spell"
 import {
   cleanTags,
   formatAbilityList,
@@ -12,12 +12,9 @@ import {
   formatDuration,
   formatRange,
   formatSourceRef,
-} from "../utils/formatters";
-import { SpellEntryRenderer } from "./SpellEntryRenderer";
-
-interface SpellDetailsProps {
-  spell: Spell;
-}
+} from "../../utils/formatters"
+import { SpellEntryRenderer } from "../SpellEntryRenderer"
+import type { SpellDetailsProps } from "./types"
 
 const coveredFields = new Set<keyof Spell>([
   "areaTags",
@@ -45,58 +42,62 @@ const coveredFields = new Set<keyof Spell>([
   "source",
   "spellAttack",
   "time",
-]);
+])
 
 function DetailItem({ label, value }: { label: string; value?: string }) {
-  if (!value) return null;
+  if (!value) return null
   return (
     <div className="border-l-3 border-[#7e1f22]/50 pl-2.5">
       <dt className="text-xs font-black uppercase text-[#6f5942]">{label}</dt>
       <dd className="mt-0.5 mb-0">{value}</dd>
     </div>
-  );
+  )
 }
 
 function formatUnknownValue(value: unknown): string {
-  if (typeof value === "string") return cleanTags(value);
-  if (typeof value === "number" || typeof value === "boolean") return String(value);
-  if (value === null || value === undefined) return "";
-  return JSON.stringify(value, null, 2);
+  if (typeof value === "string") return cleanTags(value)
+  if (typeof value === "number" || typeof value === "boolean")
+    return String(value)
+  if (value === null || value === undefined) return ""
+  return JSON.stringify(value, null, 2)
 }
 
 export function SpellDetails({ spell }: SpellDetailsProps) {
-  const classList = spell.classes.fromClassList.map(formatSourceRef).join(", ");
+  const classList = spell.classes.fromClassList.map(formatSourceRef).join(", ")
   const classVariants = spell.classes.fromClassListVariant
     ?.map(formatSourceRef)
-    .join(", ");
+    .join(", ")
   const subclasses = spell.classes.fromSubclass
     ?.map(
       (item) =>
         `${formatClassName(item.class.name)}: ${item.subclass.name}${
           item.subclass.subSubclass ? ` (${item.subclass.subSubclass})` : ""
-        }`
+        }`,
     )
-    .join(", ");
+    .join(", ")
   const races = spell.races
     ?.map((race) => `${race.name} (${race.source})`)
-    .join(", ");
+    .join(", ")
   const backgrounds = spell.backgrounds
     ?.map((background) => `${background.name} (${background.source})`)
-    .join(", ");
+    .join(", ")
   const scaling = spell.scalingLevelDice
     ? Object.entries(spell.scalingLevelDice.scaling)
         .sort(([a], [b]) => Number(a) - Number(b))
         .map(([level, dice]) => `${level}º: ${dice}`)
         .join(", ")
-    : "";
+    : ""
   const unknownFields = Object.entries(spell).filter(
-    ([key]) => !coveredFields.has(key as keyof Spell)
-  );
+    ([key]) => !coveredFields.has(key as keyof Spell),
+  )
 
   return (
     <div className="grid gap-4">
       <dl className="m-0 grid grid-cols-2 gap-2.5 max-sm:grid-cols-1">
-        <DetailItem label="Tempo de conjuração" value={formatCastingTime(spell)} />
+        <DetailItem
+          label="Tempo de conjuração"
+          value={formatCastingTime(spell)}
+        />
         <DetailItem label="Alcance" value={formatRange(spell)} />
         <DetailItem label="Componentes" value={formatComponents(spell)} />
         <DetailItem label="Duração" value={formatDuration(spell)} />
@@ -104,13 +105,34 @@ export function SpellDetails({ spell }: SpellDetailsProps) {
         <DetailItem label="Variantes de classe" value={classVariants} />
         <DetailItem label="Subclasses" value={subclasses} />
         <DetailItem label="Fonte" value={`${spell.source}, p. ${spell.page}`} />
-        <DetailItem label="Ataque de magia" value={formatAttackList(spell.spellAttack)} />
-        <DetailItem label="Teste de resistência" value={formatAbilityList(spell.savingThrow)} />
-        <DetailItem label="Teste oposto" value={formatAbilityList(spell.opposedCheck)} />
-        <DetailItem label="Dano causado" value={formatDamageList(spell.damageInflict)} />
-        <DetailItem label="Resistência concedida" value={formatDamageList(spell.damageResist)} />
-        <DetailItem label="Imunidade concedida" value={formatDamageList(spell.damageImmune)} />
-        <DetailItem label="Vulnerabilidade" value={formatDamageList(spell.damageVulnerable)} />
+        <DetailItem
+          label="Ataque de magia"
+          value={formatAttackList(spell.spellAttack)}
+        />
+        <DetailItem
+          label="Teste de resistência"
+          value={formatAbilityList(spell.savingThrow)}
+        />
+        <DetailItem
+          label="Teste oposto"
+          value={formatAbilityList(spell.opposedCheck)}
+        />
+        <DetailItem
+          label="Dano causado"
+          value={formatDamageList(spell.damageInflict)}
+        />
+        <DetailItem
+          label="Resistência concedida"
+          value={formatDamageList(spell.damageResist)}
+        />
+        <DetailItem
+          label="Imunidade concedida"
+          value={formatDamageList(spell.damageImmune)}
+        />
+        <DetailItem
+          label="Vulnerabilidade"
+          value={formatDamageList(spell.damageVulnerable)}
+        />
         <DetailItem label="Área" value={formatAreaTags(spell.areaTags)} />
         <DetailItem label="Raças" value={races} />
         <DetailItem label="Antecedentes" value={backgrounds} />
@@ -126,7 +148,9 @@ export function SpellDetails({ spell }: SpellDetailsProps) {
       {spell.entriesHigherLevel?.map((entry, index) => (
         <section key={`${entry.name ?? "higher"}-${index}`}>
           <h3 className="mb-2 font-serif text-lg text-[#4b1114]">
-            {entry.name === "At Higher Levels" ? "Em níveis superiores" : entry.name}
+            {entry.name === "At Higher Levels"
+              ? "Em níveis superiores"
+              : entry.name}
           </h3>
           <div className="grid gap-2.5">
             {entry.entries.map((item, itemIndex) => (
@@ -140,7 +164,9 @@ export function SpellDetails({ spell }: SpellDetailsProps) {
 
       {unknownFields.length > 0 && (
         <section>
-          <h3 className="mb-2 font-serif text-lg text-[#4b1114]">Outros dados</h3>
+          <h3 className="mb-2 font-serif text-lg text-[#4b1114]">
+            Outros dados
+          </h3>
           <div className="grid gap-2.5">
             {unknownFields.map(([key, value]) => (
               <div key={key}>
@@ -154,5 +180,5 @@ export function SpellDetails({ spell }: SpellDetailsProps) {
         </section>
       )}
     </div>
-  );
+  )
 }

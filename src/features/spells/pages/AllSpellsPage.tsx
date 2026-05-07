@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
-import heroImage from "../../../assets/hero.png";
-import { SpellFilters } from "./SpellFilters";
-import { SpellList } from "./SpellList";
-import type { Spell } from "../types/spell";
-import { useSpellFilters } from "../hooks/useSpellFilters";
+import { Link } from "react-router-dom"
+import heroImage from "../../../assets/hero.png"
+import { SpellFilters } from "../components/SpellFilters"
+import { SpellList } from "../components/SpellList"
+import type { Spell } from "../types/spell"
+import { useSpellFilters } from "../hooks/useSpellFilters"
 
 interface AllSpellsPageProps {
-  prepared: Set<string>;
-  saved: Set<string>;
-  spells: Spell[];
-  toggleSaved: (name: string) => void;
+  prepared: Set<string>
+  saved: Set<string>
+  spells: Spell[]
+  toggleSaved: (name: string) => void
 }
 
 export function AllSpellsPage({
@@ -19,7 +19,7 @@ export function AllSpellsPage({
   toggleSaved,
 }: AllSpellsPageProps) {
   const { filteredSpells, filters, filterOptions, groupedSpells, setFilters } =
-    useSpellFilters(spells);
+    useSpellFilters(spells)
 
   return (
     <div className="grid gap-5 max-sm:gap-3.5">
@@ -71,5 +71,5 @@ export function AllSpellsPage({
         </p>
       )}
     </div>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import { AppShell } from "../components/layout/AppShell";
-import { AllSpellsPage } from "../features/spells/components/AllSpellsPage";
-import { SavedSpellsPage } from "../features/spells/components/SavedSpellsPage";
-import { spells } from "../features/spells/data/spells";
-import { useSavedSpells } from "../features/spells/hooks/useSavedSpells";
+import { Navigate, Route, Routes } from "react-router-dom"
+import { AppShell } from "../components/layout/AppShell"
+import { AllSpellsPage } from "../features/spells/pages/AllSpellsPage"
+import { SavedSpellsPage } from "../features/spells/pages/SavedSpellsPage"
+import { spells } from "../features/spells/data/spells"
+import { useSavedSpells } from "../features/spells/hooks/useSavedSpells"
 
 export default function App() {
   const { prepared, saved, savedSpells, togglePrepared, toggleSaved } =
-    useSavedSpells(spells);
+    useSavedSpells(spells)
 
   return (
     <AppShell savedCount={saved.size}>
@@ -38,5 +38,5 @@ export default function App() {
         <Route element={<Navigate replace to="/" />} path="*" />
       </Routes>
     </AppShell>
-  );
+  )
 }
