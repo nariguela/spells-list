@@ -1,9 +1,9 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import { AppShell } from "../components/layout/AppShell";
-import { AllSpellsPage } from "../features/spells/components/AllSpellsPage";
-import { SavedSpellsPage } from "../features/spells/components/SavedSpellsPage";
-import { spells } from "../features/spells/data/spells";
-import { useSavedSpells } from "../features/spells/hooks/useSavedSpells";
+import { Navigate, Route, Routes } from "react-router-dom"
+import { AppShell } from "../components/layout/AppShell"
+import { AllSpellsPage } from "../features/spells/pages/AllSpellsPage"
+import { SavedSpellsPage } from "../features/spells/pages/SavedSpellsPage"
+import { spells } from "../features/spells/data/spells"
+import { useSavedSpells } from "../features/spells/hooks/useSavedSpells"
 
 export default function App() {
   const { prepared, saved, savedSpells, togglePrepared, toggleSaved } =
