@@ -2,20 +2,18 @@ import type {
   SpellEntryContent,
   SpellEntryObject,
   SpellEntryTableCell,
-} from "../types/spell";
-import { cleanTags, isListEntry, isTableEntry } from "../utils/formatters";
-
-interface SpellEntryRendererProps {
-  entries: SpellEntryContent[];
-}
+} from "../../types/spell"
+import { cleanTags, isListEntry, isTableEntry } from "../../utils/formatters"
+import type { SpellEntryRendererProps } from "./types"
 
 function renderCell(cell: SpellEntryTableCell) {
-  if (typeof cell === "string") return cleanTags(cell);
-  return `${cell.roll.min}-${cell.roll.max}`;
+  if (typeof cell === "string") return cleanTags(cell)
+  return `${cell.roll.min}-${cell.roll.max}`
 }
 
 function SpellEntryBlock({ entry }: { entry: SpellEntryContent }) {
-  if (typeof entry === "string") return <p className="m-0">{cleanTags(entry)}</p>;
+  if (typeof entry === "string")
+    return <p className="m-0">{cleanTags(entry)}</p>
 
   if (isTableEntry(entry)) {
     return (
@@ -56,7 +54,7 @@ function SpellEntryBlock({ entry }: { entry: SpellEntryContent }) {
           </tbody>
         </table>
       </div>
-    );
+    )
   }
 
   if (isListEntry(entry)) {
@@ -75,21 +73,23 @@ function SpellEntryBlock({ entry }: { entry: SpellEntryContent }) {
           ))}
         </ul>
       </section>
-    );
+    )
   }
 
-  return <NestedEntry entry={entry} />;
+  return <NestedEntry entry={entry} />
 }
 
 function NestedEntry({ entry }: { entry: SpellEntryObject }) {
   return (
     <section className="grid gap-2">
       {entry.name && (
-        <h4 className="mb-0 font-serif text-[#5a281c]">{cleanTags(entry.name)}</h4>
+        <h4 className="mb-0 font-serif text-[#5a281c]">
+          {cleanTags(entry.name)}
+        </h4>
       )}
       {"entries" in entry && <SpellEntryRenderer entries={entry.entries} />}
     </section>
-  );
+  )
 }
 
 export function SpellEntryRenderer({ entries }: SpellEntryRendererProps) {
@@ -99,5 +99,5 @@ export function SpellEntryRenderer({ entries }: SpellEntryRendererProps) {
         <SpellEntryBlock entry={entry} key={index} />
       ))}
     </div>
-  );
+  )
 }

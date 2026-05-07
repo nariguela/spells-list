@@ -1,16 +1,7 @@
-import type { Spell, SpellGroupKey } from "../types/spell";
-import { formatLevelGroup } from "../utils/formatters";
-import { getSpellInstanceId } from "../utils/spellIdentity";
-import { SpellCard } from "./SpellCard";
-
-interface SpellListProps {
-  groups: Array<{ key: SpellGroupKey; spells: Spell[] }>;
-  prepared: Set<string>;
-  saved: Set<string>;
-  showPreparedControl?: boolean;
-  togglePrepared?: (name: string) => void;
-  toggleSaved: (name: string) => void;
-}
+import { formatLevelGroup } from "../../utils/formatters"
+import { getSpellInstanceId } from "../../utils/spellIdentity"
+import { SpellCard } from "../SpellCard"
+import type { SpellListProps } from "./types"
 
 export function SpellList({
   groups,
@@ -25,7 +16,9 @@ export function SpellList({
       {groups.map((group) => (
         <section className="max-sm:rounded-none" key={group.key}>
           <div className="mb-3 flex items-center gap-2.5 text-[#f5e7c3]">
-            <h2 className="m-0 font-serif text-2xl">{formatLevelGroup(group.key)}</h2>
+            <h2 className="m-0 font-serif text-2xl">
+              {formatLevelGroup(group.key)}
+            </h2>
             <span className="rounded-full border border-[#f6df9a]/30 px-2.5 py-0.5 text-[#f6df9a]">
               {group.spells.length}
             </span>
@@ -47,5 +40,5 @@ export function SpellList({
         </section>
       ))}
     </div>
-  );
+  )
 }

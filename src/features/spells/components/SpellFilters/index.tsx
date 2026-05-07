@@ -1,23 +1,10 @@
-import type { Dispatch, SetStateAction } from "react";
-import { formatLevel } from "../utils/formatters";
-import type { SpellFilters as SpellFiltersState } from "../hooks/useSpellFilters";
-
-interface SpellFiltersProps {
-  filters: SpellFiltersState;
-  options: {
-    classes: string[];
-    levels: number[];
-    schools: Array<{ value: string; label: string }>;
-  };
-  resultCount: number;
-  savedCount: number;
-  setFilters: Dispatch<SetStateAction<SpellFiltersState>>;
-}
+import { formatLevel } from "../../utils/formatters"
+import type { SpellFiltersProps } from "./types"
 
 const labelClass =
-  "grid gap-1.5 text-xs font-extrabold uppercase text-[#6f5942]";
+  "grid gap-1.5 text-xs font-extrabold uppercase text-[#6f5942]"
 const fieldClass =
-  "min-h-10 w-full rounded-md border border-[#4d2e1a]/30 bg-[#fff8e8] px-2.5 py-2 text-base normal-case text-[#25180f] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#f6df9a]";
+  "min-h-10 w-full rounded-md border border-[#4d2e1a]/30 bg-[#fff8e8] px-2.5 py-2 text-base normal-case text-[#25180f] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#f6df9a]"
 
 export function SpellFilters({
   filters,
@@ -68,7 +55,10 @@ export function SpellFilters({
         <select
           className={fieldClass}
           onChange={(event) =>
-            setFilters((current) => ({ ...current, school: event.target.value }))
+            setFilters((current) => ({
+              ...current,
+              school: event.target.value,
+            }))
           }
           value={filters.school}
         >
@@ -111,5 +101,5 @@ export function SpellFilters({
         <span>{savedCount} salvas</span>
       </div>
     </section>
-  );
+  )
 }

@@ -1,25 +1,15 @@
-import { Badge } from "../../../components/ui/Badge"
-import { cn } from "../../../lib/cn"
-import type { Spell } from "../types/spell"
+import { Badge } from "../../../../components/ui/Badge"
+import { cn } from "../../../../lib/cn"
 import {
   formatCastingTime,
   formatLevel,
   formatSchool,
   hasConcentration,
   isRitual,
-} from "../utils/formatters"
-import { getSpellInstanceId } from "../utils/spellIdentity"
-import { SpellDetails } from "./SpellDetails"
-
-interface SpellCardProps {
-  instanceIndex?: number
-  isPrepared?: boolean
-  isSaved: boolean
-  onTogglePrepared?: (name: string) => void
-  onToggleSaved: (name: string) => void
-  showPreparedControl?: boolean
-  spell: Spell
-}
+} from "../../utils/formatters"
+import { getSpellInstanceId } from "../../utils/spellIdentity"
+import { SpellDetails } from "../SpellDetails"
+import type { SpellCardProps } from "./types"
 
 export function SpellCard({
   instanceIndex = 0,
