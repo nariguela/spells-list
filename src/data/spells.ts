@@ -105,10 +105,61 @@ export const spells = [
   },
   {
     name: "Ataque Certeiro",
-    source: "PHB PT-BR",
+    source: "PHB 2024 PT-BR",
     page: 284,
     level: 0,
-    school: "D",
+    school: "Adivinhação",
+    time: [
+      {
+        number: 1,
+        unit: "action",
+      },
+    ],
+    range: {
+      type: "self",
+    },
+    components: {
+      s: true,
+      m: "Uma arma com a qual você tenha proficiência e que valha pelo menos 1 cp",
+    },
+    duration: [
+      {
+        type: "instant",
+      },
+    ],
+    entries: [
+      "Você faz um ataque com a arma usada como componente material desta magia. Use sua habilidade de conjuração para a jogada de ataque e para o dano.",
+      "Em vez do tipo de dano normal da arma, você pode escolher causar dano radiante.",
+      "Se o ataque acertar, o alvo sofre o dano normal da arma. Além disso, o ataque causa 1d6 de dano radiante extra.",
+      "O dano radiante aumenta em 1d6 quando você alcança os níveis 5 (2d6), 11 (3d6) e 17 (4d6).",
+    ],
+    classes: {
+      fromClassList: [
+        {
+          name: "Bardo",
+          source: "PHB 2024",
+        },
+        {
+          name: "Feiticeiro",
+          source: "PHB 2024",
+        },
+        {
+          name: "Bruxo",
+          source: "PHB 2024",
+        },
+        {
+          name: "Mago",
+          source: "PHB 2024",
+        },
+      ],
+    },
+  },
+  {
+    name: "Dobrar os Mortos",
+    source: "XGE PT-BR",
+    page: 169,
+    level: 0,
+    school: "N",
     time: [
       {
         number: 1,
@@ -119,33 +170,47 @@ export const spells = [
       type: "point",
       distance: {
         type: "feet",
-        amount: 30,
+        amount: 60,
       },
     },
     components: {
+      v: true,
       s: true,
     },
     duration: [
       {
-        type: "timed",
-        duration: {
-          type: "round",
-          amount: 1,
-        },
-        concentration: true,
+        type: "instant",
       },
     ],
     entries: [
-      "Você estende sua mão e aponta o dedo para um alvo no alcance. Sua magia garante a você uma breve intuição sobre as defesas do alvo. No seu próximo turno, você terá vantagem na primeira jogada de ataque contra o alvo, considerando que essa magia não tenha acabado.",
+      "Você aponta para uma criatura que possa ver dentro do alcance. O som de um sino fúnebre ecoa ao redor do alvo. Ele deve ser bem-sucedido em um teste de resistência de Sabedoria ou sofrerá dano necrótico.",
+      "Se o alvo estiver com todos os pontos de vida, ele sofre {@dice 1d8} de dano necrótico. Caso contrário, sofre {@dice 1d12} de dano necrótico.",
     ],
+    entriesHigherLevel: [
+      {
+        name: "Níveis Superiores",
+        entries: [
+          "O dano da magia aumenta em um dado quando você alcança o 5° nível ({@dice 2d8} ou {@dice 2d12}), 11° nível ({@dice 3d8} ou {@dice 3d12}) e 17° nível ({@dice 4d8} ou {@dice 4d12}).",
+        ],
+      },
+    ],
+    scalingLevelDice: {
+      label: "necrotic damage",
+      scaling: {
+        "1": "1d8/1d12",
+        "5": "2d8/2d12",
+        "11": "3d8/3d12",
+        "17": "4d8/4d12",
+      },
+    },
+    damageInflict: ["necrotic"],
+    savingThrow: ["wisdom"],
+    miscTags: ["SCL", "SGT"],
+    areaTags: ["ST"],
     classes: {
       fromClassList: [
         {
-          name: "Bard",
-          source: "PHB",
-        },
-        {
-          name: "Sorcerer",
+          name: "Cleric",
           source: "PHB",
         },
         {
@@ -158,14 +223,6 @@ export const spells = [
         },
       ],
     },
-    races: [
-      {
-        name: "Tiefling (Abyssal)",
-        source: "UAThatOldBlackMagic",
-        baseName: "Tiefling",
-        baseSource: "PHB",
-      },
-    ],
   },
   {
     name: "Consertar",
@@ -5537,10 +5594,10 @@ export const spells = [
   },
   {
     name: "Sono",
-    source: "PHB PT-BR",
-    page: 276,
+    source: "PHB 2024 PT-BR",
+    page: 317,
     level: 1,
-    school: "E",
+    school: "Encantamento",
     time: [
       {
         number: 1,
@@ -5551,13 +5608,13 @@ export const spells = [
       type: "point",
       distance: {
         type: "feet",
-        amount: 90,
+        amount: 60,
       },
     },
     components: {
       v: true,
       s: true,
-      m: "um punhado de areia fina, pétalas de rosas ou um grilo",
+      m: "um punhado de areia ou pétalas de rosa",
     },
     duration: [
       {
@@ -5566,104 +5623,32 @@ export const spells = [
           type: "minute",
           amount: 1,
         },
+        concentration: true,
       },
     ],
     entries: [
-      "Essa magia põem as criaturas num entorpecimento mágico. Jogue {@dice 5d8}; o total é a quantidade de pontos de vida de criaturas afetados pela magia. As criaturas numa área de 6 metros de raio, centrada no ponto escolhido, dentro do alcance, são afetadas em ordem ascendente dos pontos de vida atuais delas (ignorando criaturas inconscientes).",
-      "Começando com as criaturas com menos pontos de vida atuais, cada criatura afetada por essa magia cai inconsciente até a magia acabar, sofrer dano ou alguém usar sua ação para sacudi-la ou esbofeteá-la até acordar. Subtraia os pontos de vida de cada criatura do total antes de seguir para a próxima criatura com menos pontos de vida atuais. Os pontos de vida atuais da criatura devem ser iguais ou menores que o valor restante para que a criatura possa ser afetada.",
-      "Mortos-vivos e criaturas imunes a serem enfeitiçadas não são afetadas por essa magia.",
-    ],
-    entriesHigherLevel: [
-      {
-        name: "At Higher Levels",
-        entries: [
-          "Quando você conjurar essa magia usando um espaço de magia de 2º nível ou superior, jogue {@dice 2d8} adicionais para cada nível do espaço acima do 1°.",
-        ],
-      },
+      "Cada criatura de sua escolha em uma esfera de 1,5 metro de raio centrada em um ponto dentro do alcance deve ser bem-sucedida em um teste de resistência de Sabedoria ou receber a condição Incapacitado até o fim do próximo turno dela.",
+      "No fim do próximo turno, a criatura deve repetir o teste de resistência. Se falhar novamente, ela recebe a condição Inconsciente pela duração restante.",
+      "A magia termina em um alvo se ele sofrer dano ou se alguém a até 1,5 metro dele gastar uma ação para sacudi-lo e tirá-lo do efeito.",
+      "Criaturas que não dormem, como elfos, ou que tenham imunidade à condição Exaustão automaticamente são bem-sucedidas nos testes contra esta magia.",
     ],
     areaTags: ["S"],
     classes: {
       fromClassList: [
         {
-          name: "Bard",
-          source: "PHB",
+          name: "Bardo",
+          source: "PHB 2024",
         },
         {
-          name: "Sorcerer",
-          source: "PHB",
+          name: "Feiticeiro",
+          source: "PHB 2024",
         },
         {
-          name: "Wizard",
-          source: "PHB",
-        },
-      ],
-      fromSubclass: [
-        {
-          class: {
-            name: "Warlock",
-            source: "PHB",
-          },
-          subclass: {
-            name: "Archfey",
-            source: "PHB",
-          },
-        },
-        {
-          class: {
-            name: "Paladin",
-            source: "PHB",
-          },
-          subclass: {
-            name: "Redemption (UA)",
-            source: "UAATrioOfSubclasses",
-          },
-        },
-        {
-          class: {
-            name: "Paladin",
-            source: "PHB",
-          },
-          subclass: {
-            name: "Redemption",
-            source: "XGE",
-          },
-        },
-        {
-          class: {
-            name: "Cleric",
-            source: "PHB",
-          },
-          subclass: {
-            name: "Twilight (UA)",
-            source: "UAClericDruidWizard",
-          },
-        },
-        {
-          class: {
-            name: "Warlock",
-            source: "PHB",
-          },
-          subclass: {
-            name: "Noble Genie (UA)",
-            source: "UA2020SubclassesPt1",
-          },
+          name: "Mago",
+          source: "PHB 2024",
         },
       ],
     },
-    races: [
-      {
-        name: "Halfling (Mark of Hospitality)",
-        source: "ERLW",
-        baseName: "Halfling",
-        baseSource: "PHB",
-      },
-    ],
-    backgrounds: [
-      {
-        name: "Dimir Operative",
-        source: "GGR",
-      },
-    ],
   },
   {
     name: "Riso Histérico de Tasha",
@@ -5882,10 +5867,10 @@ export const spells = [
   },
   {
     name: "Orbe Cromática",
-    source: "PHB PT-BR",
+    source: "PHB 2024 PT-BR",
     page: 221,
     level: 1,
-    school: "V",
+    school: "Evocação",
     time: [
       {
         number: 1,
@@ -5903,8 +5888,7 @@ export const spells = [
       v: true,
       s: true,
       m: {
-        text: "um diamante valendo, no mínimo, 50 po",
-        cost: 5000,
+        text: "uma esfera de energia mágica",
       },
     },
     duration: [
@@ -5913,13 +5897,17 @@ export const spells = [
       },
     ],
     entries: [
-      "Você arremessa uma esfera de energia de 12 centímetros de diâmetro numa criatura que você possa ver dentro do alcance. Você escolhe ácido, frio, fogo, elétrico, veneno ou trovejante para o tipo de orbe que você cria e, então, realiza um ataque à distância com magia. Se o ataque atingir, a criatura sofre {@dice 3d8} de dano do tipo escolhido.",
+      "Você cria uma esfera de energia de cerca de 12 centímetros de diâmetro e a arremessa contra uma criatura que possa ver dentro do alcance.",
+      "Escolha ácido, frio, fogo, elétrico, veneno ou trovejante como o tipo de dano da esfera.",
+      "Faça um ataque à distância com magia contra o alvo. Se acertar, ele sofre 3d8 de dano do tipo escolhido.",
+      "Se você rolar o mesmo número em dois ou mais dos d8, o orbe salta para um alvo diferente de sua escolha dentro de 9 metros do alvo. Faça uma jogada de ataque contra o novo alvo e role novamente o dano.",
+      "O orbe não pode saltar novamente a menos que você conjure a magia usando um espaço de magia de 2º nível ou superior.",
     ],
     entriesHigherLevel: [
       {
-        name: "At Higher Levels",
+        name: "Em Níveis Superiores",
         entries: [
-          "Quando você conjurar essa magia usando um espaço de magia de 2° nível ou superior, o dano aumenta em {@dice 1d8} para cada nível do espaço acima do 1°.",
+          "Quando você conjura esta magia usando um espaço de 2º nível ou superior, o dano aumenta em 1d8 para cada nível do espaço acima do 1º.",
         ],
       },
     ],
@@ -5930,24 +5918,12 @@ export const spells = [
     classes: {
       fromClassList: [
         {
-          name: "Sorcerer",
-          source: "PHB",
+          name: "Feiticeiro",
+          source: "PHB 2024",
         },
         {
-          name: "Wizard",
-          source: "PHB",
-        },
-      ],
-      fromSubclass: [
-        {
-          class: {
-            name: "Paladin",
-            source: "PHB",
-          },
-          subclass: {
-            name: "Watchers (UA)",
-            source: "UA2020SubclassesPt1",
-          },
+          name: "Mago",
+          source: "PHB 2024",
         },
       ],
     },
@@ -5980,13 +5956,13 @@ export const spells = [
       },
     ],
     entries: [
-      "Uma criatura que você tocar recupera uma quantidade de pontos de vida igual a {@dice 1d8} + seu modificador de habilidade de conjuração. Essa magia não produz efeito em mortos-vivos ou constructos.",
+      "Uma criatura que você tocar recupera uma quantidade de pontos de vida igual a {@dice 2d8} + seu modificador de habilidade de conjuração. Essa magia não produz efeito em mortos-vivos ou constructos.",
     ],
     entriesHigherLevel: [
       {
         name: "At Higher Levels",
         entries: [
-          "Se você conjurar essa magia usando um espaço de magia de 2° nível ou superior, a cura aumenta em {@dice 1d8} para cada nível do espaço acima do 1°.",
+          "Se você conjurar essa magia usando um espaço de magia de 2° nível ou superior, a cura aumenta em {@dice 2d8} para cada nível do espaço acima do 1°.",
         ],
       },
     ],
@@ -8510,7 +8486,7 @@ export const spells = [
     time: [
       {
         number: 1,
-        unit: "action",
+        unit: "bonus",
       },
     ],
     range: {
@@ -12020,6 +11996,7 @@ export const spells = [
           type: "minute",
           amount: 1,
         },
+        concentration: true,
       },
     ],
     entries: [
